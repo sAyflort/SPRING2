@@ -1,5 +1,6 @@
-package ru.geekbrains.march.market.entities;
+package ru.geekbrains.march.market.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "products")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Product {
     @Id

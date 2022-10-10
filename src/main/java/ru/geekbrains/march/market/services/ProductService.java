@@ -2,8 +2,9 @@ package ru.geekbrains.march.market.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.march.market.dtos.CreateNewProductDto;
-import ru.geekbrains.march.market.entities.Product;
+import ru.geekbrains.march.market.dtos.MapperProduct;
+import ru.geekbrains.march.market.dtos.ProductDto;
+import ru.geekbrains.march.market.models.Product;
 import ru.geekbrains.march.market.repositories.ProductRepository;
 
 import java.util.List;
@@ -21,10 +22,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void createNewProduct(CreateNewProductDto createNewProductDto) {
-        Product product = new Product();
-        product.setTitle(createNewProductDto.getTitle());
-        product.setPrice(createNewProductDto.getPrice());
-        productRepository.save(product);
+    public void createNewProduct(ProductDto pr) {
+        productRepository.save(MapperProduct.map(pr));
     }
 }
