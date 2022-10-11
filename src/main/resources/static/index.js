@@ -15,7 +15,7 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
     }
 
     $scope.deleteProductOfCart = function (id) {
-        $http.delete('http://localhost:8189/market/api/v1/products/cart/' + id)
+        $http.delete('http://localhost:8189/market/api/v1/cart/' + id)
             .then(function (response) {
                 $scope.fillTable();
             });

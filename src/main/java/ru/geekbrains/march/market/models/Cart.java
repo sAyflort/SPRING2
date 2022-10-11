@@ -1,24 +1,30 @@
 package ru.geekbrains.march.market.models;
 
-import org.springframework.stereotype.Component;
+import lombok.Data;
+import ru.geekbrains.march.market.models.entities.Product;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 
-@Component
+@Data
 public class Cart {
 
-    private List<Product> cart = new ArrayList<>();
+    private List<CartItem> items;
+    private BigDecimal totalPrice;
 
-    public void add(Product product) {
-        cart.add(product);
+    public void add(Product p) {
+        CartItem cartItem = new CartItem(p.getId(), p.getTitle(), 1, p.getPrice(), p.getPrice());
+        items.add(cartItem);
+        recalculate();
     }
 
-    public void remove(Product product) {
-        cart.remove(product);
+    public void clear() {
+        items.clear();
+        totalPrice = BigDecimal.ZERO;
     }
 
-    public List<Product> getAllProducts() {
-        return new ArrayList<>(cart);
+    private void recalculate() {
+        totalPrice = BigDecimal.ZERO;
+        items.forEach(i -> totalPrice = totalPrice.add(i.getPrice()));
     }
 }

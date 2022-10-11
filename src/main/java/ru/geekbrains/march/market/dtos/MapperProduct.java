@@ -1,6 +1,6 @@
 package ru.geekbrains.march.market.dtos;
 
-import ru.geekbrains.march.market.models.Product;
+import ru.geekbrains.march.market.models.entities.Product;
 
 public class MapperProduct {
     public static ProductDto map(Product product) {
