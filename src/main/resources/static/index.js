@@ -36,7 +36,7 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
     }
 
     $scope.changeQuantityOfProduct = function (id, change) {
-        $http.get('http://localhost:8189/market/api/v1/cart/changeQuantity/' + id + '/' + change)
+        $http.get('http://localhost:8189/market/api/v1/cart/change/' + id + '/' + change)
             .then(function (response){
                 $scope.fillCartTable();
             });
@@ -50,7 +50,7 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
     }
 
     $scope.dropCartsProducts = function () {
-        $http.delete('http://localhost:8189/market/api/v1/cart/delete')
+        $http.get('http://localhost:8189/market/api/v1/cart/clear')
             .then(function (response) {
                 $scope.fillCartTable();
             });

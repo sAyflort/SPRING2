@@ -18,7 +18,12 @@ public class CartItem {
     private BigDecimal pricePerProduct;
     private BigDecimal price;
 
-    public void recalculatePrice() {
+    private void recalculatePrice() {
         price = pricePerProduct.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    public void changeQuantity(int delta) {
+        quantity+=delta;
+        recalculatePrice();
     }
 }

@@ -14,7 +14,6 @@ public class Cart {
 
     public void add(Product p) {
         if(!changeQuantityProductById(p.getId(), 1)) {
-
             items.add(new CartItem(p.getId(), p.getTitle(), 1, p.getPrice(), p.getPrice()));
         }
         recalculate();
@@ -28,10 +27,9 @@ public class Cart {
     public boolean changeQuantityProductById(Long id, int change) {
         for (CartItem ci: items
              ) {
-            if(ci.getProductId()==id) {
+            if(ci.getProductId().equals(id)) {
                 if (ci.getQuantity()+change >= 1) {
-                    ci.setQuantity(ci.getQuantity()+change);
-                    ci.recalculatePrice();
+                    ci.changeQuantity(change);
                 } else {
                     removeCartItem(id);
                 }
@@ -47,7 +45,8 @@ public class Cart {
     }
 
     public void removeCartItem(Long id) {
-        items.removeIf(ci -> ci.getProductId().equals(id));
-        recalculate();
+        if(items.removeIf(ci -> ci.getProductId().equals(id))) {
+            recalculate();
+        }
     }
 }
