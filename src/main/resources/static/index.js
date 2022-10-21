@@ -29,7 +29,7 @@ angular.module('market', ['ngStorage']).controller('indexController', function (
     };
 
     $scope.authCheck = function () {
-        $http.get('http://localhost:8189/market/auth/auth_check')
+        $http.get('http://localhost:8189/market/auth_check')
             .then(function (response) {
                 console.log("анасик");
                 alert(response.data.value);
@@ -107,6 +107,14 @@ angular.module('market', ['ngStorage']).controller('indexController', function (
         $http.get('http://localhost:8189/market/api/v1/cart/clear')
             .then(function (response) {
                 $scope.fillCartTable();
+            });
+    }
+
+    // Работа с заказом
+    $scope.createOrder = function () {
+        $http.post('http://localhost:8189/market/api/v1/orders', $scope.orderDetails)
+            .then(function (response){
+
             });
     }
 

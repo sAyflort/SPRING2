@@ -114,6 +114,22 @@
         </tbody>
     </table>
 
+
+    <p></p>
+    <h3>Заказать</h3>
+    <p></p>
+    <form class="row g-3" ng-submit="createOrder()">
+        <div class="col-auto">
+            <input type="text" class="form-control" id="orderDetailsAddress" ng-model="orderDetails.address" placeholder="Адрес">
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" id="orderDetailsPhone" ng-model="orderDetails.phone" placeholder="Телефон">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-outline-success"><i class="bi bi-bag-check"></i></button>
+        </div>
+    </form>
+
     <p></p>
     <h3>Добавить продукт</h3>
     <p></p>
