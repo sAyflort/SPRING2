@@ -11,7 +11,6 @@ import ru.geekbrains.march.market.models.entities.User;
 import ru.geekbrains.march.market.repositories.OrderRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +23,6 @@ public class OrderService {
 
     public void createOrder(User user, OrderDetail orderDetail) {
         orderRepository.findByUser(user).ifPresent(order -> orderRepository.deleteById(order.getId()));
-
         Cart cart = cartService.getCurrentCart();
         List<OrderItem> orderItems = cart.getItems()
                 .stream().map(item -> new OrderItem(null,
