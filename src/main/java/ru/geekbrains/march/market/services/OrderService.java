@@ -22,6 +22,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public void createOrder(User user, OrderDetail orderDetail) {
+        //test commit
         orderRepository.findByUser(user).ifPresent(order -> orderRepository.deleteById(order.getId()));
         Cart cart = cartService.getCurrentCart();
         Order order = new Order();
