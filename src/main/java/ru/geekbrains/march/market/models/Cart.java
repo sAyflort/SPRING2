@@ -33,6 +33,7 @@ public class Cart {
                 } else {
                     removeCartItem(id);
                 }
+                recalculate();
                 return true;
             }
         }
