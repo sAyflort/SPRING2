@@ -24,16 +24,19 @@ public class OrderService {
     public void createOrder(User user, OrderDetail orderDetail) {
         orderRepository.findByUser(user).ifPresent(order -> orderRepository.deleteById(order.getId()));
         Cart cart = cartService.getCurrentCart();
+        Order order = new Order();
         List<OrderItem> orderItems = cart.getItems()
-                .stream().map(item -> new OrderItem(null,
+                .stream().map(item -> new OrderItem(
                         productService.findById(item.getProductId()).get(),
-                        null, item.getQuantity(), item.getPricePerProduct(),
-                        item.getPrice(), null, null)).collect(Collectors.toList());
-        orderRepository.save(new Order(null, user, orderItems, orderDetail.getAddress(),
-                orderDetail.getPhone(), cart.getTotalPrice(), null,null));
-
-        /*Order order = orderRepository.findByUser(user).get();
-        order.getOrderItems().forEach(orderItem -> log.info(orderItem.toString()));
-        *//*System.out.println(order.getId());*/
+                        order,
+                        item.getQuantity(),
+                        item.getPricePerProduct(),
+                        item.getPrice())).collect(Collectors.toList());
+        order.setOrderItems(orderItems);
+        order.setAddress(orderDetail.getAddress());
+        order.setPhone(orderDetail.getPhone());
+        order.setTotalPrice(cart.getTotalPrice());
+        order.setUser(user);
+        orderRepository.save(order);
     }
 }
