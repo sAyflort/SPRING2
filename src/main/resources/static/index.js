@@ -2,10 +2,16 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
     $scope.fillTable = function () {
         $http.get('http://localhost:8189/market/api/v1/products')
             .then(function (response) {
-                $scope.products = response.data[0];
-                $scope.cartsProducts = response.data[1];
+                $scope.products = response.data;
             });
-    };
+    }
+
+    $scope.fillCartTable = function () {
+        $http.get('http://localhost:8189/market/api/v1/cart')
+            .then(function (response) {
+                $scope.cart = response.data;
+            });
+    }
 
     $scope.deleteProduct = function (id) {
         $http.delete('http://localhost:8189/market/api/v1/products/' + id)
@@ -15,9 +21,9 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
     }
 
     $scope.deleteProductOfCart = function (id) {
-        $http.delete('http://localhost:8189/market/api/v1/cart/' + id)
+        $http.delete('http://localhost:8189/market/api/v1/cart/delete/' + id)
             .then(function (response) {
-                $scope.fillTable();
+                $scope.fillCartTable();
             });
     }
 
@@ -29,12 +35,27 @@ angular.module('market', []).controller('indexController', function ($scope, $ht
             });
     }
 
-    $scope.addToCart = function (id) {
-        $http.get('http://localhost:8189/market/api/v1/products/' + id)
+    $scope.changeQuantityOfProduct = function (id, change) {
+        $http.get('http://localhost:8189/market/api/v1/cart/change/' + id + '/' + change)
             .then(function (response){
-                $scope.fillTable();
+                $scope.fillCartTable();
+            });
+    }
+
+    $scope.addToCart = function (id) {
+        $http.get('http://localhost:8189/market/api/v1/cart/add/' + id)
+            .then(function (response) {
+                $scope.fillCartTable();
+            });
+    }
+
+    $scope.dropCartsProducts = function () {
+        $http.get('http://localhost:8189/market/api/v1/cart/clear')
+            .then(function (response) {
+                $scope.fillCartTable();
             });
     }
 
     $scope.fillTable();
+    $scope.fillCartTable();
 });

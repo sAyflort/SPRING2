@@ -23,6 +23,17 @@ public class CartController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteProductById(@PathVariable("id") Long id){
-        //cartService
+        cartService.deleteCartItem(id);
+    }
+
+    @GetMapping("/clear")
+    public void dropCartsProducts(){
+        cartService.clearCart();
+    }
+
+    @GetMapping("/change/{id}/{change}")
+    public void changeQuantity(@PathVariable("id") Long id,
+                               @PathVariable("change") int change) {
+        cartService.changeQuantityProductById(id, change);
     }
 }
