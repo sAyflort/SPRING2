@@ -1,9 +1,9 @@
-package ru.geekbrains.march.market.core.services;
+package ru.geekbrains.march.market.auth.services;
 
 import lombok.RequiredArgsConstructor;
-import ru.geekbrains.march.market.core.models.entities.Role;
-import ru.geekbrains.march.market.core.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.march.market.auth.entities.Role;
+import ru.geekbrains.march.market.auth.repositories.RoleRepository;
 
 @Service
 @RequiredArgsConstructor

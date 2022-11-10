@@ -2,12 +2,12 @@ package ru.geekbrains.march.market.core.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.march.market.api.CartDto;
 import ru.geekbrains.march.market.core.integration.CartServiceIntegration;
 import ru.geekbrains.march.market.core.models.OrderDetail;
 import ru.geekbrains.march.market.core.models.entities.Order;
 import ru.geekbrains.march.market.core.models.entities.OrderItem;
-import ru.geekbrains.march.market.core.models.entities.User;
 import ru.geekbrains.march.market.core.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +22,9 @@ public class OrderService {
     private final ProductService productService;
     private final OrderRepository orderRepository;
 
-    public void createOrder(User user, OrderDetail orderDetail) {
-        orderRepository.findByUser(user).ifPresent(order -> orderRepository.deleteById(order.getId()));
+    @Transactional
+    public void createOrder(String username, OrderDetail orderDetail) {
+        orderRepository.findByUsername(username).ifPresent(order -> orderRepository.deleteById(order.getId()));
         CartDto cart = cartServiceIntegration.getCurrentCart();
         Order order = new Order();
         List<OrderItem> orderItems = cart.getItems()
@@ -37,7 +38,7 @@ public class OrderService {
         order.setAddress(orderDetail.getAddress());
         order.setPhone(orderDetail.getPhone());
         order.setTotalPrice(cart.getTotalPrice());
-        order.setUser(user);
+        order.setUsername(username);
         orderRepository.save(order);
         cartServiceIntegration.cartClear();
     }

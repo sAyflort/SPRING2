@@ -9,7 +9,9 @@
 		<module>cart-service</module>
 		<module>api</module>
         <module>front</module>
-    </modules>
+        <module>gateway-service</module>
+		<module>auth-service</module>
+	</modules>
 
 	<groupId>ru.geekbrains.march.market</groupId>
 	<artifactId>parent-service</artifactId>

@@ -8,6 +8,9 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class MarchMarketApplication {
 
+	//2. Продолжить распылять на микросервисы
+	//3. Добавить фильтрацию товаров по цене и названию
+
 	public static void main(String[] args) {
 		SpringApplication.run(MarchMarketApplication.class, args);
 	}

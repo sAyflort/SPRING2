@@ -1,4 +1,4 @@
-package ru.geekbrains.march.market.core.models;
+package ru.geekbrains.march.market.auth.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class JwtTokenUtil {
+public class  JwtTokenUtil {
     @Value("${jwt.secret}")
     private String secret;
 
