@@ -31,7 +31,6 @@ angular.module('market', ['ngStorage']).controller('indexController', function (
     $scope.authCheck = function () {
         $http.get('http://localhost:5555/auth/auth_check')
             .then(function (response) {
-                console.log("анасик");
                 alert(response.data.value);
             });
     };
@@ -53,6 +52,11 @@ angular.module('market', ['ngStorage']).controller('indexController', function (
 
     // Таблица продуктов
     $scope.fillTable = function () {
+        /*let url = new URL('http://localhost:5555/core/api/v1/products');
+        let params = url.searchParams;
+        $scope.filters.titleFilter.toString();*/
+        console.log();
+        $scope.filte
         $http.get('http://localhost:5555/core/api/v1/products')
             .then(function (response) {
                 $scope.products = response.data;

@@ -9,6 +9,7 @@ import ru.geekbrains.march.market.core.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +21,11 @@ public class ProductController {
     private final ProductConverter productConverter;
 
     @GetMapping
-    public List<ProductDto> getAllProducts() {
-        return productService.findAll().stream().map(productConverter::entityToDto).collect(Collectors.toList());
+    public List<ProductDto> getAllProducts(
+            @RequestParam(required = false) String titleFilter,
+            @RequestParam(required = false) BigDecimal minPriceFilter,
+            @RequestParam(required = false) BigDecimal maxPriceFilter) {
+        return productService.findAll(titleFilter, minPriceFilter, maxPriceFilter).stream().map(productConverter::entityToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
