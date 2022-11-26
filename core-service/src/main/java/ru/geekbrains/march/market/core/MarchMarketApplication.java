@@ -8,12 +8,11 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class MarchMarketApplication {
 
+	//Добавить фильтрацию товаров по цене и названию
+	//TODO
+
 	public static void main(String[] args) {
 		SpringApplication.run(MarchMarketApplication.class, args);
 	}
 
-	@Bean
-	public RestTemplate getRestTemplate() {
-		return new RestTemplate();
-	}
 }

@@ -6,6 +6,7 @@ import ru.geekbrains.march.market.core.models.entities.Product;
 import ru.geekbrains.march.market.core.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +15,8 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<Product> findAll(String titleFilter, BigDecimal minPriceFilter, BigDecimal maxPriceFilter) {
+        return  productRepository.productsByFilter(minPriceFilter, maxPriceFilter, titleFilter);
     }
 
     public void deleteById(Long id) {

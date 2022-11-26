@@ -53,6 +53,20 @@
     <p></p>
     <h3>Список товаров</h3>
     <p></p>
+    <form class="row g-3" ng-submit="fillTable()">
+        <div class="col-auto">
+            <input type="text" class="form-control" id="filterTitle" ng-model="filter.title" placeholder="Название">
+        </div>
+        <div class="col-auto">
+            <input type="number" class="form-control" id="filterMinPriceFilter" ng-model="filter.minPriceFilter" placeholder="Минимальная цена">
+        </div>
+        <div class="col-auto">
+            <input type="number" class="form-control" id="filterMaxPriceFilter" ng-model="filter.maxPriceFilter" placeholder="Максимальная цена">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Поиск</button>
+        </div>
+    </form>
     <table class="table table-hover">
         <thead>
         <tr>
