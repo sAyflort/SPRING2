@@ -16,9 +16,10 @@ import ru.geekbrains.march.market.core.exceptions.ResourceNotFoundException;
 public class CartServiceIntegration {
     private final WebClient cartServiceWebClient;
 
-    public CartDto getCurrentCart() {
+    public CartDto getCurrentCart(String username) {
         return cartServiceWebClient.get()
-                .uri("/api/v1/cart/")
+                .uri("/api/v1/cart/0")
+                .header("username", username)
                 .retrieve()
                 .onStatus(
                         httpStatus -> httpStatus.value() == HttpStatus.NOT_FOUND.value(),
@@ -28,9 +29,10 @@ public class CartServiceIntegration {
                 .block();
     }
 
-    public void cartClear() {
+    public void cartClear(String username) {
         cartServiceWebClient.delete()
-            .uri("/api/v1/cart/clear")
+            .uri("/api/v1/cart/0/clear")
+            .header("username", username)
             .retrieve()
             .toBodilessEntity()
             .block();

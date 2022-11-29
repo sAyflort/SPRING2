@@ -2,6 +2,7 @@ package ru.geekbrains.march.market.core.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.march.market.api.CartDto;
 import ru.geekbrains.march.market.core.integration.CartServiceIntegration;
@@ -24,8 +25,7 @@ public class OrderService {
 
     @Transactional
     public Order createOrder(String username, OrderDetail orderDetail) {
-        orderRepository.findByUsername(username).ifPresent(order -> orderRepository.deleteById(order.getId()));
-        CartDto cart = cartServiceIntegration.getCurrentCart();
+        CartDto cart = cartServiceIntegration.getCurrentCart(username);
         Order order = new Order();
         List<OrderItem> orderItems = cart.getItems()
                 .stream().map(item -> new OrderItem(
@@ -40,7 +40,11 @@ public class OrderService {
         order.setTotalPrice(cart.getTotalPrice());
         order.setUsername(username);
         orderRepository.save(order);
-        cartServiceIntegration.cartClear();
+        cartServiceIntegration.cartClear(username);
         return order;
+    }
+
+    public List<Order> findByUsername(String username) {
+        return orderRepository.findByUsername(username);
     }
 }

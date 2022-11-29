@@ -18,6 +18,16 @@ public class Cart {
         recalculate();
     }
 
+    public void addAllCartItem(List<CartItem> cartItems) {
+        for (CartItem c: cartItems
+             ) {
+            if(!changeQuantityProductById(c.getProductId(), c.getQuantity())) {
+                items.add(new CartItem(c.getProductId(), c.getProductTitle(), c.getQuantity(), c.getPricePerProduct(), c.getPrice()));
+            }
+            recalculate();
+        }
+    }
+
     public void clear() {
         items.clear();
         totalPrice = BigDecimal.ZERO;

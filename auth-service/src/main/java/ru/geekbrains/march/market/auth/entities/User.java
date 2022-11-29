@@ -1,6 +1,7 @@
 package ru.geekbrains.march.market.auth.entities;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+@ToString
 @Entity
 @Data
 @Table(name = "users")

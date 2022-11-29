@@ -51,7 +51,7 @@ public class OrderServiceTest {
         orderDetail = new OrderDetail("улица Пушкина, дом Колотушкина", "88005553535");
 
         Mockito.doReturn(Optional.of(product)).when(productService).findById(1L);
-        Mockito.doReturn(cartDto).when(cartServiceIntegration).getCurrentCart();
+        //Mockito.doReturn(cartDto).when(cartServiceIntegration).getCurrentCart();
         Assertions.assertEquals(BigDecimal.valueOf(20), orderService.createOrder("Ironman", orderDetail).getTotalPrice());
     }
 }

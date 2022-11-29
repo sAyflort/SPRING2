@@ -1,0 +1,27 @@
+<div>
+    <p></p>
+    <h3>Регистрация</h3>
+    <p></p>
+
+    <form class="row g-3" ng-submit="funcRegistration()">
+        <div class="form-floating input-group-sm">
+            <input type="text" class="form-control" id="userUsername" placeholder="Имя пользователя" ng-model="regUser.username">
+        </div>
+        <div class="form-floating input-group-sm">
+            <input type="text" class="form-control" id="userEmail" placeholder="Почта" ng-model="regUser.email">
+        </div>
+        <p></p>
+        <div class="form-floating input-group-sm">
+            <input type="password" class="form-control" id="userPass" placeholder="Пароль" ng-model="regUser.password">
+        </div>
+        <p></p>
+        <div class="form-floating input-group-sm">
+            <input type="password" class="form-control" id="userPass2" placeholder="Повторить пароль" ng-model="regUser.confirmPassword">
+        </div>
+        <p></p>
+        <div>
+            <button class="btn btn-outline-warning btn-sm" type="submit">Зарегистрироваться</button>
+        </div>
+
+    </form>
+</div>
