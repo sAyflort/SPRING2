@@ -1,17 +1,18 @@
 package ru.geekbrains.march.market.core.controllers;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import ru.geekbrains.march.market.api.ProductDto;
 import lombok.RequiredArgsConstructor;
 import ru.geekbrains.march.market.core.converters.ProductConverter;
 import ru.geekbrains.march.market.core.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.core.models.entities.Product;
+import ru.geekbrains.march.market.core.repositories.specifications.ProductsSpecifications;
 import ru.geekbrains.march.market.core.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -21,11 +22,30 @@ public class ProductController {
     private final ProductConverter productConverter;
 
     @GetMapping
-    public List<ProductDto> getAllProducts(
-            @RequestParam(required = false) String titleFilter,
-            @RequestParam(required = false) BigDecimal minPriceFilter,
-            @RequestParam(required = false) BigDecimal maxPriceFilter) {
-        return productService.findAll(titleFilter, minPriceFilter, maxPriceFilter).stream().map(productConverter::entityToDto).collect(Collectors.toList());
+    public Page<ProductDto> getAllProducts(
+            @RequestParam(name = "p", defaultValue = "1") Integer page,
+            @RequestParam(name = "page_size", defaultValue = "10") Integer pageSize,
+            @RequestParam(name = "title_part", required = false) String titlePart,
+            @RequestParam(name = "min_price", required = false) Integer minPrice,
+            @RequestParam(name = "max_price", required = false) Integer maxPrice
+    ) {
+        if (page < 1) {
+            page = 1;
+        }
+        if(pageSize < 1) {
+            pageSize = 10;
+        }
+        Specification<Product> spec = Specification.where(null);
+        if (titlePart != null) {
+            spec = spec.and(ProductsSpecifications.titleLike(titlePart));
+        }
+        if (minPrice != null) {
+            spec = spec.and(ProductsSpecifications.priceGreaterOrEqualsThan(BigDecimal.valueOf(minPrice)));
+        }
+        if (maxPrice != null) {
+            spec = spec.and(ProductsSpecifications.priceLessThanOrEqualsThan(BigDecimal.valueOf(maxPrice)));
+        }
+        return productService.findAll(page - 1, pageSize, spec).map(productConverter::entityToDto);
     }
 
     @GetMapping("/{id}")
