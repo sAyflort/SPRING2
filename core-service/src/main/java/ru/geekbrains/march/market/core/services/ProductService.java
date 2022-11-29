@@ -1,5 +1,8 @@
 package ru.geekbrains.march.market.core.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import ru.geekbrains.march.market.api.ProductDto;
 import lombok.RequiredArgsConstructor;
 import ru.geekbrains.march.market.core.models.entities.Product;
@@ -15,8 +18,8 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public List<Product> findAll(String titleFilter, BigDecimal minPriceFilter, BigDecimal maxPriceFilter) {
-        return  productRepository.productsByFilter(minPriceFilter, maxPriceFilter, titleFilter);
+    public Page<Product> findAll(int page, int pageSize, Specification<Product> specification) {
+        return productRepository.findAll(specification, PageRequest.of(page, pageSize));
     }
 
     public void deleteById(Long id) {

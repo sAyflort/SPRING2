@@ -10,7 +10,19 @@ insert into products (title, price) values
 ('Butter', 320),
 ('Cheese', 500),
 ('BreadTest', 400),
-('TestBread', 400);
+('TestBread', 400),
+('Bread1', 32),
+('Milk1', 120),
+('Butter1', 320),
+('Cheese1', 500),
+('BreadTest1', 400),
+('TestBread1', 400),
+('Bread2', 32),
+('Milk2', 120),
+('Butter2', 320),
+('Cheese2', 500),
+('BreadTest2', 400),
+('TestBread2', 400);
 
 create table orders
 (
