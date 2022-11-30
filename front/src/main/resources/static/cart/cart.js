@@ -3,28 +3,28 @@ angular.module('market').controller('cartController', function ($scope, $http, $
     const coreContextPath = 'http://localhost:5555/core/';
 
     $scope.fillCartTable = function () {
-        $http.get(contextPath + 'api/v1/cart')
+        $http.get(contextPath + 'api/v1/cart/' + $localStorage.marchMarketGuestCartId)
             .then(function (response) {
                 $scope.cart = response.data;
             });
     }
 
     $scope.deleteProductOfCart = function (id) {
-        $http.delete(contextPath + 'api/v1/cart/delete/' + id)
+        $http.delete(contextPath + 'api/v1/cart/' + $localStorage.marchMarketGuestCartId + '/delete/' + id)
             .then(function (response) {
                 $scope.fillCartTable();
             });
     }
 
     $scope.changeQuantityOfProduct = function (id, change) {
-        $http.get(contextPath + 'api/v1/cart/change/' + id + '/' + change)
+        $http.get(contextPath + 'api/v1/cart/' + $localStorage.marchMarketGuestCartId + '/change/' + id + '/' + change)
             .then(function (response){
                 $scope.fillCartTable();
             });
     }
 
     $scope.dropCartsProducts = function () {
-        $http.delete(contextPath + 'api/v1/cart/clear')
+        $http.delete(contextPath + 'api/v1/cart/' + $localStorage.marchMarketGuestCartId + '/clear')
             .then(function (response) {
                 $scope.fillCartTable();
             });

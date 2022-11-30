@@ -51,7 +51,7 @@ angular.module('market').controller('storeController', function ($scope, $http, 
     }
 
     $scope.addToCart = function (id) {
-        $http.get(cartContextPath + 'api/v1/cart/add/' + id)
+        $http.get(cartContextPath + 'api/v1/cart/' + $localStorage.marchMarketGuestCartId + '/add/' + id)
             .then(function (response) {
                 $scope.fillCartTable();
             });
