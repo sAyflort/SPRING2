@@ -24,7 +24,7 @@ public class Order {
     @Column(name = "username")
     private String username;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<OrderItem> orderItems;
 
     @Column(name = "address")

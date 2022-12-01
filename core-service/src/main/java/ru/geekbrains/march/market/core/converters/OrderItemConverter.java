@@ -9,7 +9,7 @@ public class OrderItemConverter {
     public OrderItemDto entityToDto(OrderItem o) {
         OrderItemDto orderItemDto = new OrderItemDto();
         orderItemDto.setPrice(o.getPrice());
-        orderItemDto.setId(o.getId());
+        orderItemDto.setProductId(o.getId());
         orderItemDto.setQuantity(o.getQuantity());
         orderItemDto.setPricePerProduct(o.getPricePerProduct());
         orderItemDto.setProductTitle(o.getProduct().getTitle());

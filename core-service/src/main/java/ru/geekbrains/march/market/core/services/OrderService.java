@@ -12,6 +12,7 @@ import ru.geekbrains.march.market.core.models.entities.OrderItem;
 import ru.geekbrains.march.market.core.repositories.OrderRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,5 +46,9 @@ public class OrderService {
 
     public List<Order> findByUsername(String username) {
         return orderRepository.findByUsername(username);
+    }
+
+    public Optional<Order> getOrderById(Long id) {
+        return Optional.of(orderRepository.getById(id));
     }
 }

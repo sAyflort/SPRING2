@@ -9,10 +9,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.march.market.api.OrderDto;
 import ru.geekbrains.march.market.core.converters.OrderConverter;
+import ru.geekbrains.march.market.core.exceptions.AppError;
+import ru.geekbrains.march.market.core.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.core.models.OrderDetail;
+import ru.geekbrains.march.market.core.models.entities.Order;
 import ru.geekbrains.march.market.core.services.OrderService;
 
 import java.util.List;
@@ -54,5 +58,15 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public List<OrderDto> getUserOrders(@RequestHeader String username) {
         return orderService.findByUsername(username).stream().map(orderConverter::entityToDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderDto getOrderById(@RequestHeader String username, @PathVariable Long id) {
+        Order order = orderService.getOrderById(id).get();
+        if(!order.getUsername().equals(username)) {
+            return new OrderDto();
+        }
+        return orderConverter.entityToDto(order);
     }
 }
