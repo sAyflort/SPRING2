@@ -2,7 +2,7 @@ package ru.geekbrains.march.market.core.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Or;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.march.market.api.CartDto;
 import ru.geekbrains.march.market.core.integration.CartServiceIntegration;
@@ -10,9 +10,9 @@ import ru.geekbrains.march.market.core.models.OrderDetail;
 import ru.geekbrains.march.market.core.models.entities.Order;
 import ru.geekbrains.march.market.core.models.entities.OrderItem;
 import ru.geekbrains.march.market.core.repositories.OrderRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,5 +46,9 @@ public class OrderService {
 
     public List<Order> findByUsername(String username) {
         return orderRepository.findByUsername(username);
+    }
+
+    public Optional<Order> getOrderById(Long id) {
+        return Optional.of(orderRepository.getById(id));
     }
 }

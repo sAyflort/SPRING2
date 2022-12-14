@@ -1,14 +1,11 @@
 package ru.geekbrains.march.market.core.integration;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import ru.geekbrains.march.market.api.CartDto;
-import ru.geekbrains.march.market.api.ProductDto;
 import ru.geekbrains.march.market.core.exceptions.ResourceNotFoundException;
 
 @Component

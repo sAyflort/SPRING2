@@ -50,10 +50,13 @@
                     <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>
                 </li>
                 <li class="nav-item" ng-show="!isUserLoggedIn()">
-                    <a class="nav-link" href="#!/registration">Регистрация</a>
+                    <a class="btn btn-outline-secondary btn-sm" href="#!/registration">Регистрация</a>
                 </li>
                 <li class="nav-item"  style="padding: 4px;">
                     <button class="btn btn-outline-warning btn-sm" ng-click="authCheck()">Кто я?</button>
+                </li>
+                <li class="nav-item"  style="padding: 4px;">
+                    <button class="btn btn-outline-warning btn-sm" ng-click="isAdmin()">админ</button>
                 </li>
 
             </ul>
@@ -65,6 +68,7 @@
     <script src="index.js"></script>
     <script src="store/store.js"></script>
     <script src="order/order.js"></script>
+    <script src="orderItem/orderItem.js"></script>
     <script src="cart/cart.js"></script>
     <script src="welcome/welcome.js"></script>
     <script src="registration/registration.js"></script>

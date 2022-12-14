@@ -1,16 +1,14 @@
 package ru.geekbrains.march.market.core.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 import ru.geekbrains.march.market.api.ProductDto;
-import lombok.RequiredArgsConstructor;
 import ru.geekbrains.march.market.core.models.entities.Product;
 import ru.geekbrains.march.market.core.repositories.ProductRepository;
-import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 @Service

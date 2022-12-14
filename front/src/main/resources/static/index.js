@@ -22,6 +22,10 @@
                 templateUrl: 'order/order.html',
                 controller: 'orderController'
             })
+            .when('/orderItem', {
+                templateUrl: 'orderItem/orderItem.html',
+                controller: 'orderItemController'
+            })
             .when('/registration', {
                 templateUrl: 'registration/registration.html',
                 controller: 'registrationController'
@@ -75,6 +79,13 @@ angular.module('market').controller('indexController', function ($rootScope, $sc
                     });
                 }
             }, function errorCallback(response) {
+            });
+    };
+
+    $scope.isAdmin = function () {
+        $http.get('http://localhost:5555/auth/admin')
+            .then(function (response) {
+                alert(response.data.value);
             });
     };
 
