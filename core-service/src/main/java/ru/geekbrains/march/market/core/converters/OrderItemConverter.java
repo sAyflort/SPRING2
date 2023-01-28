@@ -8,10 +8,10 @@ import ru.geekbrains.march.market.core.models.entities.OrderItem;
 public class OrderItemConverter {
     public OrderItemDto entityToDto(OrderItem o) {
         return OrderItemDto.builder()
-                .price(o.getPrice())
+                .price(o.getPrice())//
                 .productId(o.getId())
-                .quantity(o.getQuantity())
-                .pricePerProduct(o.getPricePerProduct())
+                .quantity(o.getQuantity())//
+                .pricePerProduct(o.getPricePerProduct())//
                 .productTitle(o.getProduct().getTitle())
                 .build();
     }
