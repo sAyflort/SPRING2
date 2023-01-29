@@ -7,12 +7,12 @@ import ru.geekbrains.march.market.core.models.entities.OrderItem;
 @Component
 public class OrderItemConverter {
     public OrderItemDto entityToDto(OrderItem o) {
-        OrderItemDto orderItemDto = new OrderItemDto();
-        orderItemDto.setPrice(o.getPrice());
-        orderItemDto.setProductId(o.getId());
-        orderItemDto.setQuantity(o.getQuantity());
-        orderItemDto.setPricePerProduct(o.getPricePerProduct());
-        orderItemDto.setProductTitle(o.getProduct().getTitle());
-        return orderItemDto;
+        return OrderItemDto.builder()
+                .price(o.getPrice())//
+                .productId(o.getId())
+                .quantity(o.getQuantity())//
+                .pricePerProduct(o.getPricePerProduct())//
+                .productTitle(o.getProduct().getTitle())
+                .build();
     }
 }

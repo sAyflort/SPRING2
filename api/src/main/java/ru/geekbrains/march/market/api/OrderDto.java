@@ -1,6 +1,7 @@
 package ru.geekbrains.march.market.api;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Data
 @Schema(description = "Модель заказа")
+@Builder
 public class OrderDto {
 
     @Schema(description = "ID заказа", required = true, example = "1")

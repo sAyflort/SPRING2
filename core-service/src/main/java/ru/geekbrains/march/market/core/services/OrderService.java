@@ -28,12 +28,14 @@ public class OrderService {
         CartDto cart = cartServiceIntegration.getCurrentCart(username);
         Order order = new Order();
         List<OrderItem> orderItems = cart.getItems()
-                .stream().map(item -> new OrderItem(
-                        productService.findById(item.getProductId()).get(),
-                        order,
-                        item.getQuantity(),
-                        item.getPricePerProduct(),
-                        item.getPrice())).collect(Collectors.toList());
+                .stream().map(item -> OrderItem.builder()
+                        .product(productService.findById(item.getProductId()).get())
+                        .order(order)
+                        .quantity(item.getQuantity())
+                        .pricePerProduct(item.getPricePerProduct())
+                        .price(item.getPrice())
+                        .build()
+                ).collect(Collectors.toList());
         order.setOrderItems(orderItems);
         order.setAddress(orderDetail.getAddress());
         order.setPhone(orderDetail.getPhone());

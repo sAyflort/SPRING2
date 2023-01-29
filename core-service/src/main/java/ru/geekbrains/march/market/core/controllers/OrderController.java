@@ -65,7 +65,7 @@ public class OrderController {
     public OrderDto getOrderById(@RequestHeader String username, @PathVariable Long id) {
         Order order = orderService.getOrderById(id).get();
         if(!order.getUsername().equals(username)) {
-            return new OrderDto();
+            return OrderDto.builder().build();
         }
         return orderConverter.entityToDto(order);
     }

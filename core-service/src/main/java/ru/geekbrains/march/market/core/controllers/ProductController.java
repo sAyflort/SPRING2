@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.march.market.api.ProductDto;
-import ru.geekbrains.march.market.core.converters.ProductConverter;
+import ru.geekbrains.march.market.core.converters.ProductMapper;
 import ru.geekbrains.march.market.core.exceptions.AppError;
 import ru.geekbrains.march.market.core.exceptions.ResourceNotFoundException;
 import ru.geekbrains.march.market.core.models.entities.Product;
@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 @Tag(name = "Продукты", description = "Методы работы с продуктами")
 public class ProductController {
     private final ProductService productService;
-    private final ProductConverter productConverter;
+    private final ProductMapper productMapper;
 
 
     @Operation(
@@ -55,7 +55,7 @@ public class ProductController {
         spec = minPrice != null ? spec.and(ProductsSpecifications.priceGreaterOrEqualsThan(BigDecimal.valueOf(minPrice))) : spec;
         spec = maxPrice != null ? spec.and(ProductsSpecifications.priceLessThanOrEqualsThan(BigDecimal.valueOf(maxPrice))) : spec;
 
-        return productService.findAll(page - 1, pageSize, spec).map(productConverter::entityToDto);
+        return productService.findAll(page - 1, pageSize, spec).map(productMapper::entityToDto);
     }
 
     @Operation(
@@ -74,7 +74,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductDto getProductById(@PathVariable Long id) {
         Product pr = productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Продукт с id: " + id + " не найден"));
-        return productConverter.entityToDto(pr);
+        return productMapper.entityToDto(pr);
     }
 
     @Operation(
